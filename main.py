@@ -7,8 +7,8 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.websockets import WebSocketDisconnect
 from twilio.twiml.voice_response import VoiceResponse, Connect
 
-from utils.prompts import ADVISOR_PROMPT
-from utils.config import AZURE_API_KEY, PORT, WEBSOCKET_URI, AI_INTRO
+from utils.prompts import ADVISOR_PROMPT, AI_INITIATION_PROMPT
+from utils.config import AZURE_API_KEY, PORT, WEBSOCKET_URI
 from utils.functions import (
     GET_STUDENT_ID,
     SEND_EMAIL,
@@ -337,7 +337,7 @@ async def send_initial_conversation_item(openai_ws):
             "content": [
                 {
                     "type": "input_text",
-                    "text": AI_INTRO,
+                    "text": AI_INITIATION_PROMPT,
                 }
             ],
         },

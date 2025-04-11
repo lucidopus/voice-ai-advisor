@@ -1,5 +1,6 @@
 import os
 
+
 # ======================= GENERAL =======================
 
 ADVISOR_NAME = "Attila AI"
@@ -64,5 +65,17 @@ LOG_EVENT_TYPES = [
     "session.created",
 ]
 SHOW_TIMING_MATH = False
+
+# =======================================================
+
+
+
+
+# ====================== LANGSMITH ======================
+# For prompts
+
+LANGSMITH_API_KEY = os.getenv('LANGSMITH_API_KEY')
+LANGSMITH_ACADEMIC_ADVISOR_PROMPT_IDENTIFIER = os.getenv('LANGSMITH_ACADEMIC_ADVISOR_PROMPT_IDENTIFIER')
+LANGSMITH_AI_INITIATION_PROMPT_IDENTIFIER = os.getenv('LANGSMITH_AI_INITIATION_PROMPT_IDENTIFIER')
 
 # =======================================================

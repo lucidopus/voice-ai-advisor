@@ -5,10 +5,12 @@ from datetime import datetime
 from pinecone import Pinecone
 from langchain_openai import AzureOpenAIEmbeddings
 from azure.communication.email import EmailClient
+from langsmith import Client
 
 from utils.database import dummy_database
 from utils.config import (
     AZURE_EMAIL_URI,
+    ADVISOR_NAME,
     AZURE_API_KEY,
     AZURE_EMAIL,
     HUMAN_ADVISOR_EMAIL,
@@ -17,6 +19,9 @@ from utils.config import (
     PINECONE_INDEX,
     AZURE_EMBEDDINGS_BASE,
     AZURE_EMBEDDING_MODEL,
+    LANGSMITH_API_KEY,
+    LANGSMITH_ACADEMIC_ADVISOR_PROMPT_IDENTIFIER,
+    LANGSMITH_AI_INITIATION_PROMPT_IDENTIFIER,
 )
 
 embedding_model = AzureOpenAIEmbeddings(
@@ -27,6 +32,18 @@ embedding_model = AzureOpenAIEmbeddings(
 
 
 client = EmailClient.from_connection_string(AZURE_EMAIL_URI)
+langsmith_client = Client(api_key=LANGSMITH_API_KEY)
+
+
+def get_advisor_prompt():
+    prompt = langsmith_client.pull_prompt(LANGSMITH_ACADEMIC_ADVISOR_PROMPT_IDENTIFIER)
+    prompt = prompt.messages[0].prompt.format(ADVISOR_NAME=ADVISOR_NAME)
+    return prompt
+
+def get_ai_initiation_prompt():
+    prompt = langsmith_client.pull_prompt(LANGSMITH_AI_INITIATION_PROMPT_IDENTIFIER)
+    prompt = prompt.messages[0].prompt.format(ADVISOR_NAME=ADVISOR_NAME)
+    return prompt
 
 
 def get_email_from_cwid(cwid):
