@@ -1,0 +1,13 @@
+fastapi==0.115.12
+uvicorn==0.34.0
+twilio==9.5.1
+requests==2.32.3
+pydantic==2.11.2
+python-dotenv==1.1.0
+websockets==13.1
+pinecone==6.0.2
+pandas==2.2.3
+langchain-openai==0.3.12
+azure-identity==1.21.0
+azure-communication-email==1.0.0
+langsmith==0.3.24
